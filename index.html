@@ -28,7 +28,7 @@
             display: block;
             margin: auto;
             box-shadow: 0 25px 60px rgba(0,0,0,1);
-            border: 12px solid #1e1b18;
+            border: 10px solid #1e1b18;
             border-radius: 6px;
             background-color: #064e3b;
         }
@@ -59,7 +59,7 @@
         .active-turn {
             border-color: #10b981 !important;
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         #audio-toggle, #reset-btn {
@@ -67,7 +67,8 @@
         }
         
         @media (orientation: landscape) {
-            #ui-overlay { padding-top: 10px; }
+            #ui-overlay { padding-top: 5px; }
+            #game-container { margin-top: 10px; }
         }
 
         .fade-in { animation: fadeIn 0.5s ease-out; }
@@ -79,7 +80,7 @@
     <!-- Pantalla Inicial (Menú) -->
     <div id="start-screen" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center p-6 text-center">
         <div class="mb-12">
-            <h1 class="text-white text-5xl font-black italic tracking-tighter mb-2">CARAMBOLA <span class="text-emerald-500">PRO</span></h1>
+            <h1 class="text-white text-5xl font-black italic tracking-tighter mb-2 uppercase">Carambola <span class="text-emerald-500">Pro</span></h1>
             <p class="text-white/40 text-xs uppercase tracking-[0.3em]">Simulador de Alta Precisión</p>
         </div>
         
@@ -91,25 +92,24 @@
         </div>
     </div>
 
-    <!-- UI Superior - Doble Marcador -->
-    <div id="ui-overlay" class="hidden fixed top-0 left-0 w-full p-4 flex justify-around items-start z-10 pointer-events-none gap-4 mt-safe">
+    <!-- UI Superior - Doble Marcador (REDUCIDO) -->
+    <div id="ui-overlay" class="hidden fixed top-0 left-0 w-full px-4 pt-2 flex justify-around items-start z-10 pointer-events-none gap-2">
         <!-- Jugador 1 (Blanca) -->
-        <div id="p1-panel" class="bg-black/80 backdrop-blur-xl p-3 rounded-2xl border border-white/10 text-white shadow-2xl flex-1 max-w-[160px] transition-all duration-300 active-turn">
-            <div class="flex items-center gap-2 mb-1">
-                <div class="w-3 h-3 rounded-full bg-white shadow-sm"></div>
-                <p class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Jugador 1</p>
+        <div id="p1-panel" class="bg-black/80 backdrop-blur-xl p-2 rounded-xl border border-white/10 text-white shadow-xl flex-1 max-w-[120px] transition-all duration-300 active-turn">
+            <div class="flex items-center gap-2 mb-0.5 justify-center">
+                <div class="w-2 h-2 rounded-full bg-white shadow-sm"></div>
+                <p class="text-[8px] uppercase tracking-widest opacity-60 font-bold">J1</p>
             </div>
-            <p class="text-[10px] uppercase tracking-tighter opacity-40 mb-1 font-bold text-center">CARAMBOLAS</p>
-            <p id="score1" class="text-3xl font-black italic text-center">0</p>
+            <p id="score1" class="text-xl font-black italic text-center">0</p>
         </div>
 
         <!-- Centro: Estado y Sonido -->
-        <div class="flex flex-col items-center gap-3">
-            <div id="state-indicator" class="bg-emerald-500/20 backdrop-blur-xl px-4 py-2 rounded-full border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase tracking-[0.1em] shadow-lg whitespace-nowrap">
+        <div class="flex flex-col items-center gap-1.5 pt-1">
+            <div id="state-indicator" class="bg-emerald-500/20 backdrop-blur-xl px-3 py-1 rounded-full border border-emerald-500/30 text-emerald-400 text-[8px] font-black uppercase tracking-[0.1em] shadow-lg whitespace-nowrap">
                 Turno J1
             </div>
-            <button id="audio-toggle" class="bg-white/10 hover:bg-white/20 text-white p-2 rounded-full border border-white/10 transition-colors pointer-events-auto">
-                <svg id="audio-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <button id="audio-toggle" class="bg-white/10 hover:bg-white/20 text-white p-1.5 rounded-full border border-white/10 transition-colors pointer-events-auto">
+                <svg id="audio-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06zM6 5.04L4.312 6.39A.5.5 0 0 1 4 6.5H2v3h2a.5.5 0 0 1 .312.11L6 10.96V5.04z"/>
                     <path d="M11.536 14.01A8.473 8.473 0 0 0 14.026 8a8.473 8.473 0 0 0-2.49-6.01l-.708.707A7.476 7.476 0 0 1 13.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
                 </svg>
@@ -117,13 +117,12 @@
         </div>
 
         <!-- Jugador 2 (Amarilla) -->
-        <div id="p2-panel" class="bg-black/80 backdrop-blur-xl p-3 rounded-2xl border border-white/10 text-white shadow-2xl flex-1 max-w-[160px] transition-all duration-300 text-right">
-            <div class="flex items-center justify-end gap-2 mb-1">
-                <p class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Jugador 2</p>
-                <div class="w-3 h-3 rounded-full bg-yellow-400 shadow-sm"></div>
+        <div id="p2-panel" class="bg-black/80 backdrop-blur-xl p-2 rounded-xl border border-white/10 text-white shadow-xl flex-1 max-w-[120px] transition-all duration-300">
+            <div class="flex items-center gap-2 mb-0.5 justify-center">
+                <p class="text-[8px] uppercase tracking-widest opacity-60 font-bold">J2</p>
+                <div class="w-2 h-2 rounded-full bg-yellow-400 shadow-sm"></div>
             </div>
-            <p class="text-[10px] uppercase tracking-tighter opacity-40 mb-1 font-bold text-center">CARAMBOLAS</p>
-            <p id="score2" class="text-3xl font-black italic text-center">0</p>
+            <p id="score2" class="text-xl font-black italic text-center">0</p>
         </div>
     </div>
 
@@ -131,8 +130,8 @@
     <div id="game-container" class="relative hidden">
         <canvas id="poolTable"></canvas>
         
-        <!-- Botón Reset (Esquina inferior) -->
-        <button id="reset-btn" class="absolute -bottom-12 right-0 bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-1.5 rounded-lg text-white/40 text-[9px] uppercase font-bold tracking-widest transition-all">
+        <!-- Botón Reset (Pequeño y ajustado) -->
+        <button id="reset-btn" class="absolute -bottom-10 right-0 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-1.5 rounded-lg text-white/50 text-[10px] uppercase font-bold tracking-widest transition-all">
             Reset
         </button>
     </div>
@@ -382,7 +381,8 @@
         }
 
         function init() {
-            const h = window.innerHeight * 0.55;
+            // AUMENTO DE TAMAÑO PARA LANDSCAPE
+            const h = window.innerHeight * 0.75;
             height = h;
             width = h * 1.9;
             canvas.width = width;
@@ -591,12 +591,12 @@
                 else { scores.p2++; score2Element.innerText = scores.p2; }
                 SoundEngine.playSuccess();
                 stateIndicator.innerText = "¡CARAMBOLA! J" + currentPlayer + " repite";
-                stateIndicator.className = "bg-yellow-500 text-black px-4 py-2 rounded-full border border-yellow-200 text-[10px] font-black uppercase tracking-[0.1em] shadow-lg animate-bounce";
+                stateIndicator.className = "bg-yellow-500 text-black px-4 py-1.5 rounded-full border border-yellow-200 text-[8px] font-black uppercase tracking-[0.1em] shadow-lg animate-bounce";
             } else {
                 SoundEngine.playFail();
                 currentPlayer = (currentPlayer === 1) ? 2 : 1;
                 stateIndicator.innerText = "Fallo. Turno J" + currentPlayer;
-                stateIndicator.className = "bg-red-500 text-white px-4 py-2 rounded-full border border-red-300 text-[10px] font-black uppercase tracking-[0.1em] shadow-lg";
+                stateIndicator.className = "bg-red-500 text-white px-4 py-1.5 rounded-full border border-red-300 text-[8px] font-black uppercase tracking-[0.1em] shadow-lg";
                 if (currentPlayer === 1) { p1Panel.classList.add('active-turn'); p2Panel.classList.remove('active-turn'); } 
                 else { p2Panel.classList.add('active-turn'); p1Panel.classList.remove('active-turn'); }
             }
@@ -605,7 +605,7 @@
                 if (appState !== 'PLAYING') return;
                 gameState = 'AIMING';
                 stateIndicator.innerText = "Turno J" + currentPlayer;
-                stateIndicator.className = "bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full border border-emerald-500/30 text-[10px] font-black uppercase tracking-[0.1em] shadow-lg";
+                stateIndicator.className = "bg-emerald-500/20 text-emerald-400 px-4 py-1.5 rounded-full border border-emerald-500/30 text-[8px] font-black uppercase tracking-[0.1em] shadow-lg";
                 hits = { white: false, yellow: false, red: false };
             }, 1800);
         }
@@ -640,7 +640,7 @@
             p1Panel.classList.add('active-turn');
             p2Panel.classList.remove('active-turn');
             stateIndicator.innerText = "Turno J1";
-            stateIndicator.className = "bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full border border-emerald-500/30 text-[10px] font-black uppercase tracking-[0.1em] shadow-lg";
+            stateIndicator.className = "bg-emerald-500/20 text-emerald-400 px-4 py-1.5 rounded-full border border-emerald-500/30 text-[8px] font-black uppercase tracking-[0.1em] shadow-lg";
             
             // Posicionar bolas
             balls[0].x = width * 0.2; balls[0].y = height * 0.5; balls[0].vx = 0; balls[0].vy = 0;
